@@ -1,0 +1,13 @@
+{
+	"workoutID": "1",
+	"workoutName": "1 On 1 Off",
+	"energySystemName": "Endurance",
+	"energySubtypeName": "Aerobic Capacity",
+	"synopsis": "Moderate/pumpy climbing - 1 min on, 1 min rest, 10 reps",
+	"shortDescription": "The goal of this workout is to maintain a high level of blood flow throughout the session.",
+	"longDescription": "This is going to become the very long description",
+	"facility": "Route Wall",
+	"facility_opt": "Boulder",
+	"duration": 20,
+	"active": true
+}
