@@ -1,3 +1,4 @@
+[
 {
 	"workoutID": "1",
 	"workoutName": "1 On 1 Off",
@@ -10,4 +11,18 @@
 	"facility_opt": "Boulder",
 	"duration": 20,
 	"active": true
+},
+{
+	"workoutID": "2",
+	"workoutName": "7:3s 50%",
+	"energySystemName": "Power Endurance",
+	"energySubtypeName": "Aerobic Power",
+	"synopsis": "Deadhang repeaters - 7 sec hang, 3 sec rest @ 50%",
+	"shortDescription": "The goal of this workout is to improve the forearm's power endurance through metabolically adaption at a higher intensity.",
+	"longDescription": "This is going to become the very long description",
+	"facility": "Fingerboard",
+	"facility_opt": "",
+	"duration": 40,
+	"active": true
 }
+]
