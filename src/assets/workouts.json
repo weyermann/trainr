@@ -1,6 +1,5 @@
 [
 {
-	"workoutID": "1",
 	"workoutName": "1 On 1 Off",
 	"energySystemName": "Endurance",
 	"energySubtypeName": "Aerobic Capacity",
@@ -10,10 +9,16 @@
 	"facility": "Route Wall",
 	"facility_opt": "Boulder",
 	"duration": 20,
-	"active": true
+  "active": true,
+  "online": true,
+  "experienceLevel": 1,
+  "defNumberOfSets": 1,
+	"defNumberOfRepsPerSet": 10,
+	"defLoadDurationSeconds": 60,
+	"defRestDurationBetweenRepsSeconds": 60,
+	"defRestDurationBetweenSetsSeconds": 180
 },
 {
-	"workoutID": "2",
 	"workoutName": "7:3s 50%",
 	"energySystemName": "Power Endurance",
 	"energySubtypeName": "Aerobic Power",
@@ -23,6 +28,32 @@
 	"facility": "Fingerboard",
 	"facility_opt": "",
 	"duration": 40,
-	"active": true
+  "active": true,
+  "online": true,
+  "experienceLevel": 2,
+  "defNumberOfSets": 6,
+	"defNumberOfRepsPerSet": 12,
+	"defLoadDurationSeconds": 7,
+	"defRestDurationBetweenRepsSeconds": 180,
+	"defRestDurationBetweenSetsSeconds": 240
+},
+{
+	"workoutName": "Board 10",
+	"energySystemName": "Strength and Power",
+	"energySubtypeName": "Bouldering",
+	"synopsis": "Hard problems using a training board",
+	"shortDescription": "Executing 10 different boulder problems at two difficulty levels on a bouldering wall or training board, up to 10 tries per boulder problem.",
+	"longDescription": "This is going to become the very long description",
+	"facility": "Bouldering wall",
+	"facility_opt": "",
+	"duration": 40,
+  "active": true,
+  "online": true,
+  "experienceLevel": 1,
+  "defNumberOfSets": 10,
+	"defNumberOfRepsPerSet": 10,
+	"defLoadDurationSeconds": 240,
+	"defRestDurationBetweenRepsSeconds": 60,
+	"defRestDurationBetweenSetsSeconds": 180
 }
 ]
