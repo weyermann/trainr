@@ -15,16 +15,18 @@ import { MainCategoriesComponent } from './intro/main-categories/main-categories
 import { SideNavigationComponent } from './nav/side-navigation/side-navigation.component';
 import { ServiceWorkerModule } from '@angular/service-worker';
 import { environment } from '../environments/environment';
+import { TestCardComponent } from './shared/components/test-card/test-card.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     WorkoutCatalogComponent,
     MainCategoriesComponent,
-    SideNavigationComponent
+    SideNavigationComponent,
+    TestCardComponent
   ],
   imports: [
-    NgxsModule.forRoot([]),
+    NgxsModule.forRoot([], { developmentMode: true }),
     NgxsLoggerPluginModule.forRoot(),
     BrowserModule,
     BrowserAnimationsModule,

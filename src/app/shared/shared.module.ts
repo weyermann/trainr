@@ -4,7 +4,6 @@ import { MatButtonModule, MatCheckboxModule, MatToolbarModule, MatIconModule, Ma
 import { FlexLayoutModule } from '@angular/flex-layout';
 
 @NgModule({
-  declarations: [],
   imports: [
     CommonModule,
     MatButtonModule,
