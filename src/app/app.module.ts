@@ -1,3 +1,7 @@
+import { NgxsModule } from '@ngxs/store';
+import { NgxsLoggerPluginModule } from '@ngxs/logger-plugin';
+import { NgxsReduxDevtoolsPluginModule } from '@ngxs/devtools-plugin';
+
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 
@@ -9,6 +13,8 @@ import { SharedModule } from './shared/shared.module';
 import { WorkoutCatalogComponent } from './workouts/workout-catalog/workout-catalog.component';
 import { MainCategoriesComponent } from './intro/main-categories/main-categories.component';
 import { SideNavigationComponent } from './nav/side-navigation/side-navigation.component';
+import { ServiceWorkerModule } from '@angular/service-worker';
+import { environment } from '../environments/environment';
 
 @NgModule({
   declarations: [
@@ -18,10 +24,15 @@ import { SideNavigationComponent } from './nav/side-navigation/side-navigation.c
     SideNavigationComponent
   ],
   imports: [
+    NgxsModule.forRoot([]),
+    NgxsLoggerPluginModule.forRoot(),
     BrowserModule,
     BrowserAnimationsModule,
     AppRoutingModule,
-    SharedModule
+    SharedModule,
+    ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production }),
+
+    NgxsReduxDevtoolsPluginModule.forRoot() // This should be the last import (at least of the ngxs imports)
   ],
   providers: [],
   bootstrap: [AppComponent]

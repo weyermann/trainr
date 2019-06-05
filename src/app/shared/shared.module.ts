@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { MatButtonModule, MatCheckboxModule, MatToolbarModule, MatIconModule, MatSidenavModule, MatListModule} from '@angular/material';
+import { FlexLayoutModule } from '@angular/flex-layout';
 
 @NgModule({
   declarations: [],
@@ -11,7 +12,8 @@ import { MatButtonModule, MatCheckboxModule, MatToolbarModule, MatIconModule, Ma
     MatToolbarModule,
     MatIconModule,
     MatSidenavModule,
-    MatListModule
+    MatListModule,
+    FlexLayoutModule
   ],
   exports: [
     MatButtonModule,
@@ -19,7 +21,8 @@ import { MatButtonModule, MatCheckboxModule, MatToolbarModule, MatIconModule, Ma
     MatToolbarModule,
     MatIconModule,
     MatSidenavModule,
-    MatListModule
+    MatListModule,
+    FlexLayoutModule
   ]
 })
 export class SharedModule { }
