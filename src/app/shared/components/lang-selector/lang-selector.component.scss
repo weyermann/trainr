@@ -1,3 +1,16 @@
 .langselect {
   width: 50px;
 }
+
+.navigation_lang_select{
+  display: flex;
+  line-height: 45px;
+  padding-right:35px;
+}
+
+.navigation_lang_select .lang_select {
+  cursor: pointer;
+  text-decoration: none;
+  color: #616161;
+  padding-left: 10px;
+}

@@ -18,6 +18,10 @@ import { environment } from '../environments/environment';
 import { TestCardComponent } from './shared/components/test-card/test-card.component';
 import { LangSelectorComponent } from './shared/components/lang-selector/lang-selector.component';
 
+import {TranslateLoader, TranslateModule} from '@ngx-translate/core';
+import {TranslateHttpLoader} from '@ngx-translate/http-loader';
+import {HttpClient, HttpClientModule} from '@angular/common/http';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -29,6 +33,14 @@ import { LangSelectorComponent } from './shared/components/lang-selector/lang-se
 
   ],
   imports: [
+    HttpClientModule,
+    TranslateModule.forRoot({
+      loader: {
+          provide: TranslateLoader,
+          useFactory: HttpLoaderFactory,
+          deps: [HttpClient]
+      }
+    }),
     NgxsModule.forRoot([], { developmentMode: true }),
     NgxsLoggerPluginModule.forRoot(),
     BrowserModule,
@@ -43,3 +55,8 @@ import { LangSelectorComponent } from './shared/components/lang-selector/lang-se
   bootstrap: [AppComponent]
 })
 export class AppModule { }
+
+// required for AOT compilation
+export function HttpLoaderFactory(http: HttpClient) {
+  return new TranslateHttpLoader(http);
+}

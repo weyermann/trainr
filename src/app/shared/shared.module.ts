@@ -3,7 +3,7 @@ import { CommonModule } from '@angular/common';
 // tslint:disable-next-line:max-line-length
 import { MatButtonModule, MatCheckboxModule, MatToolbarModule, MatIconModule, MatSidenavModule, MatListModule, MatSelectModule} from '@angular/material';
 import { FlexLayoutModule } from '@angular/flex-layout';
-import { LangSelectorComponent } from './components/lang-selector/lang-selector.component';
+import { MatMenuModule } from '@angular/material/menu';
 
 @NgModule({
   imports: [
@@ -15,7 +15,8 @@ import { LangSelectorComponent } from './components/lang-selector/lang-selector.
     MatSidenavModule,
     MatListModule,
     MatSelectModule,
-    FlexLayoutModule
+    FlexLayoutModule,
+    MatMenuModule
   ],
   exports: [
     MatButtonModule,
@@ -25,7 +26,8 @@ import { LangSelectorComponent } from './components/lang-selector/lang-selector.
     MatSidenavModule,
     MatListModule,
     MatSelectModule,
-    FlexLayoutModule
+    FlexLayoutModule,
+    MatMenuModule
   ]
 })
 export class SharedModule { }

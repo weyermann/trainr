@@ -1,8 +1,12 @@
-<mat-form-field class="langselect">
-  <!-- <mat-label>Language</mat-label> -->
-  <mat-select>
-    <mat-option *ngFor="let lang of langs" [value]="lang.value">
-      {{lang.viewValue}}
-    </mat-option>
-  </mat-select>
-</mat-form-field>
+<span class="navigation_lang_select">
+  <mat-menu #langSelectMenu="matMenu">
+    <button mat-menu-item (click)="languageChanged('de')" class="spec-select-lang-de">DE</button>
+    <button mat-menu-item (click)="languageChanged('fr')" class="spec-select-lang-fr">FR</button>
+    <button mat-menu-item (click)="languageChanged('en')" class="spec-select-lang-en">EN</button>
+  </mat-menu>
+
+  <button [matMenuTriggerFor]="langSelectMenu" class="lang_select" mat-icon-button>
+    {{ languageCode}}
+    <mat-icon>arrow_drop_down</mat-icon>
+  </button>
+</span>
