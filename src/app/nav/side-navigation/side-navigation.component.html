@@ -1,22 +1,19 @@
 <div class="nav-container" [class.nav-is-mobile]="mobileQuery.matches">
   <mat-toolbar color="primary" class="nav-toolbar">
-    <div fxLayout="row">
 
-      <div fxLayout="row" fxFlex="50" fxLayoutAlign="start center" style="background-color: yellowgreen">
-        <!-- menu button to toggle side nav -->
-        <button mat-icon-button (click)="snav.toggle()">
-          <mat-icon>menu</mat-icon>
-        </button>
-        <!-- app title -->
-        <h1 class="nav-app-name">trainr</h1>
-      </div>
+    <span>
+      <!-- menu button to toggle side nav -->
+      <button mat-icon-button (click)="snav.toggle()">
+        <mat-icon>menu</mat-icon>
+      </button>
+      <!-- app title -->
+      <!-- <h1 class="nav-app-name">trainr</h1>
+        <h1 class="nav-app-name">trainr</h1> -->
+    </span>
 
-      <div fxLayout="row" fxFlex fxLayoutAlign="end center" style="background-color: sandybrown">
-        <!-- language selector -->
-        <app-lang-selector></app-lang-selector>
-      </div>
-
-    </div>
+    <span class="spacer"></span>
+    <!-- language selector -->
+    <app-lang-selector></app-lang-selector>
 
   </mat-toolbar>
 
@@ -25,14 +22,14 @@
     <!-- Change second option in '[mode]' to 'side' to get initial behaviour -->
     <mat-sidenav #snav [mode]="mobileQuery.matches ? 'over' : 'over'" [fixedInViewport]="mobileQuery.matches"
       fixedTopGap="56">
-      <mat-nav-list>
+      <mat-nav-list style="min-width: 300px;">
         <a mat-list-item routerLink="/categories" (click)="snav.toggle()">Overview</a>
         <a mat-list-item routerLink="/catalog" (click)="snav.toggle()">Workout Catalog</a>
       </mat-nav-list>
     </mat-sidenav>
 
     <mat-sidenav-content>
-        <router-outlet></router-outlet>
+      <router-outlet></router-outlet>
     </mat-sidenav-content>
   </mat-sidenav-container>
 </div>

@@ -33,6 +33,33 @@
             "scripts": []
           },
           "configurations": {
+            "en": {
+              "aot": true,
+              "outputPath": "dist/en/",
+              "i18nFile": "src/locale/translations.en.xlf",
+              "i18nFormat": "xlf",
+              "i18nLocale": "en",
+              "i18nMissingTranslation": "error",
+              "baseHref": "/en/"
+            },
+            "de": {
+              "aot": true,
+              "outputPath": "dist/de/",
+              "i18nFile": "src/locale/translations.de.xlf",
+              "i18nFormat": "xlf",
+              "i18nLocale": "de",
+              "i18nMissingTranslation": "error",
+              "baseHref": "/de/"
+            },
+            "fr": {
+              "aot": true,
+              "outputPath": "dist/fr/",
+              "i18nFile": "src/locale/translations.fr.xlf",
+              "i18nFormat": "xlf",
+              "i18nLocale": "fr",
+              "i18nMissingTranslation": "error",
+              "baseHref": "/fr/"
+            },
             "production": {
               "fileReplacements": [
                 {
@@ -67,6 +94,15 @@
             "browserTarget": "trainr:build"
           },
           "configurations": {
+            "de": {
+              "browserTarget": "trainr:build:de"
+            },
+            "en": {
+              "browserTarget": "trainr:build:en"
+            },
+            "fr": {
+              "browserTarget": "trainr:build:fr"
+            },
             "production": {
               "browserTarget": "trainr:build:production"
             }

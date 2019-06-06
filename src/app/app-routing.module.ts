@@ -16,7 +16,7 @@ const routes: Routes = [
   },
   {
     path: '',
-    redirectTo: '/categories',
+    redirectTo: '/de/categories',
     pathMatch: 'full'
   }
 ];

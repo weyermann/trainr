@@ -4,6 +4,7 @@
     <body>
       <trans-unit id="MainTitleCatalog" datatype="html">
         <source>Workout catalog</source>
+        <target>Workout catalogue</target>
         <context-group purpose="location">
           <context context-type="sourcefile">app/workouts/workout-catalog/workout-catalog.component.html</context>
           <context context-type="linenumber">4</context>
@@ -13,6 +14,7 @@
       </trans-unit>
       <trans-unit id="SubtitleCatalogPower" datatype="html">
         <source>Power &amp; Strength</source>
+        <target>Force</target>
         <context-group purpose="location">
           <context context-type="sourcefile">app/workouts/workout-catalog/workout-catalog.component.html</context>
           <context context-type="linenumber">5</context>
