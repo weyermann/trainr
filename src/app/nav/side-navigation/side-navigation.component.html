@@ -1,9 +1,23 @@
 <div class="nav-container" [class.nav-is-mobile]="mobileQuery.matches">
   <mat-toolbar color="primary" class="nav-toolbar">
-    <button mat-icon-button (click)="snav.toggle()">
-      <mat-icon>menu</mat-icon>
-    </button>
-    <h1 class="nav-app-name">trainr</h1>
+    <div fxLayout="row">
+
+      <div fxLayout="row" fxFlex="50" fxLayoutAlign="start center" style="background-color: yellowgreen">
+        <!-- menu button to toggle side nav -->
+        <button mat-icon-button (click)="snav.toggle()">
+          <mat-icon>menu</mat-icon>
+        </button>
+        <!-- app title -->
+        <h1 class="nav-app-name">trainr</h1>
+      </div>
+
+      <div fxLayout="row" fxFlex fxLayoutAlign="end center" style="background-color: sandybrown">
+        <!-- language selector -->
+        <app-lang-selector></app-lang-selector>
+      </div>
+
+    </div>
+
   </mat-toolbar>
 
   <mat-sidenav-container class="nav-sidenav-container" [style.marginTop.px]="mobileQuery.matches ? 56 : 0">

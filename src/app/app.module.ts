@@ -8,7 +8,7 @@ import { NgModule } from '@angular/core';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 
-import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { SharedModule } from './shared/shared.module';
 import { WorkoutCatalogComponent } from './workouts/workout-catalog/workout-catalog.component';
 import { MainCategoriesComponent } from './intro/main-categories/main-categories.component';
@@ -16,6 +16,7 @@ import { SideNavigationComponent } from './nav/side-navigation/side-navigation.c
 import { ServiceWorkerModule } from '@angular/service-worker';
 import { environment } from '../environments/environment';
 import { TestCardComponent } from './shared/components/test-card/test-card.component';
+import { LangSelectorComponent } from './shared/components/lang-selector/lang-selector.component';
 
 @NgModule({
   declarations: [
@@ -23,7 +24,9 @@ import { TestCardComponent } from './shared/components/test-card/test-card.compo
     WorkoutCatalogComponent,
     MainCategoriesComponent,
     SideNavigationComponent,
-    TestCardComponent
+    TestCardComponent,
+    LangSelectorComponent
+
   ],
   imports: [
     NgxsModule.forRoot([], { developmentMode: true }),

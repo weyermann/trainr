@@ -7,7 +7,10 @@
     "build": "ng build",
     "test": "ng test",
     "lint": "ng lint",
-    "e2e": "ng e2e"
+    "e2e": "ng e2e",
+    "int:extract:de": "ng xi18n --i18n-locale de --out-file locale/translations.de.xlf",
+    "int:extract:en": "ng xi18n --i18n-locale en --out-file locale/translations.en.xlf",
+    "int:extract:fr": "ng xi18n --i18n-locale fr --out-file locale/translations.fr.xlf"
   },
   "private": true,
   "dependencies": {

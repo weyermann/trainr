@@ -1,7 +1,9 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { MatButtonModule, MatCheckboxModule, MatToolbarModule, MatIconModule, MatSidenavModule, MatListModule} from '@angular/material';
+// tslint:disable-next-line:max-line-length
+import { MatButtonModule, MatCheckboxModule, MatToolbarModule, MatIconModule, MatSidenavModule, MatListModule, MatSelectModule} from '@angular/material';
 import { FlexLayoutModule } from '@angular/flex-layout';
+import { LangSelectorComponent } from './components/lang-selector/lang-selector.component';
 
 @NgModule({
   imports: [
@@ -12,6 +14,7 @@ import { FlexLayoutModule } from '@angular/flex-layout';
     MatIconModule,
     MatSidenavModule,
     MatListModule,
+    MatSelectModule,
     FlexLayoutModule
   ],
   exports: [
@@ -21,6 +24,7 @@ import { FlexLayoutModule } from '@angular/flex-layout';
     MatIconModule,
     MatSidenavModule,
     MatListModule,
+    MatSelectModule,
     FlexLayoutModule
   ]
 })
