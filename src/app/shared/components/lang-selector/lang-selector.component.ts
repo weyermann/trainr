@@ -33,7 +33,7 @@ export class LangSelectorComponent {
   }
 
   languageChanged(lang: string) {
-    this.languageCode = lang;
+    this.languageCode = lang.toUpperCase();
     // Call global Language Service to set the new language and inform observers
     this.runtimeService.changeLanguage(lang);
   }
