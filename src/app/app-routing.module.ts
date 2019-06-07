@@ -1,5 +1,5 @@
 import { WorkoutCatalogComponent } from './workouts/workout-catalog/workout-catalog.component';
-import { MainCategoriesComponent } from './intro/main-categories/main-categories.component';
+import { MainCategoriesComponent } from './categories/main-categories/main-categories.component';
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 
