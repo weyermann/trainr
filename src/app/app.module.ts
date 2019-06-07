@@ -21,6 +21,8 @@ import { LangSelectorComponent } from './shared/components/lang-selector/lang-se
 import {TranslateLoader, TranslateModule} from '@ngx-translate/core';
 import {TranslateHttpLoader} from '@ngx-translate/http-loader';
 import {HttpClient, HttpClientModule} from '@angular/common/http';
+import { WorkoutsModule } from './domains/workouts/workouts.module';
+import { MainCategoriesModule } from './domains/categories/main-categories.module';
 
 @NgModule({
   declarations: [
@@ -41,15 +43,16 @@ import {HttpClient, HttpClientModule} from '@angular/common/http';
           deps: [HttpClient]
       }
     }),
-    NgxsModule.forRoot([], { developmentMode: true }),
-    NgxsLoggerPluginModule.forRoot(),
     BrowserModule,
     BrowserAnimationsModule,
     AppRoutingModule,
     SharedModule,
     ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production }),
-
-    NgxsReduxDevtoolsPluginModule.forRoot() // This should be the last import (at least of the ngxs imports)
+    NgxsModule.forRoot([], { developmentMode: true }),
+    NgxsLoggerPluginModule.forRoot(),
+    NgxsReduxDevtoolsPluginModule.forRoot(), // This should be the last import (at least of the ngxs imports)
+    WorkoutsModule,
+    MainCategoriesModule
   ],
   providers: [],
   bootstrap: [AppComponent]
