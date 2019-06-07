@@ -10,8 +10,8 @@ import { AppComponent } from './app.component';
 
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { SharedModule } from './shared/shared.module';
-import { WorkoutCatalogComponent } from './workouts/workout-catalog/workout-catalog.component';
-import { MainCategoriesComponent } from './categories/main-categories/main-categories.component';
+import { WorkoutCatalogComponent } from './domains/workouts/containers/workout-catalog/workout-catalog.component';
+import { MainCategoriesComponent } from './domains/categories/containers/main-categories/main-categories.component';
 import { SideNavigationComponent } from './nav/side-navigation/side-navigation.component';
 import { ServiceWorkerModule } from '@angular/service-worker';
 import { environment } from '../environments/environment';

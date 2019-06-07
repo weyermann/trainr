@@ -3,8 +3,8 @@ import { environment } from './../../environments/environment.prod';
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { WorkoutListResponse } from '../workouts/models';
 import { map } from 'rxjs/operators';
+import { WorkoutListResponse } from '../model/workout';
 
 @Injectable({
   providedIn: 'root'
