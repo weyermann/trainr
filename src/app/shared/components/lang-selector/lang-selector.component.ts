@@ -22,14 +22,23 @@ export class LangSelectorComponent {
     private host: HostService,
     private runtimeService: RuntimeService
   ) {
-    // this.host.getBrowserLang().subscribe(l => {
-    //   if (l.indexOf('_') !== -1) {
-    //     // Handle en-US formatted locale
-    //     this.defaultLang = l.split('_')[0];
-    //   } else {
-    //     this.defaultLang = l;
-    //   }
-    // });
+    this.host.getBrowserLang().subscribe(l => {
+      if (l.indexOf('-') !== -1) {
+        // Handle en-US formatted locale
+        this.defaultLang = l.split('-')[0];
+      } else {
+        this.defaultLang = l;
+      }
+      if (!this.defaultLang || this.defaultLang === '') {
+        // alert('no browser lang');
+        this.defaultLang = 'en';
+      } else {
+        // alert('browser lang is ' + this.defaultLang);
+      }
+      // set display value and broadcast language
+      this.languageCode = this.defaultLang.toUpperCase();
+      this.runtimeService.changeLanguage(this.defaultLang);
+    });
   }
 
   languageChanged(lang: string) {
