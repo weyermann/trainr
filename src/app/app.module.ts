@@ -23,6 +23,12 @@ import {TranslateHttpLoader} from '@ngx-translate/http-loader';
 import {HttpClient, HttpClientModule} from '@angular/common/http';
 import { WorkoutsModule } from './domains/workouts/workouts.module';
 import { MainCategoriesModule } from './domains/categories/main-categories.module';
+import { NgZorroAntdModule, NZ_I18N, en_US } from 'ng-zorro-antd';
+import { FormsModule } from '@angular/forms';
+import { registerLocaleData } from '@angular/common';
+import en from '@angular/common/locales/en';
+
+registerLocaleData(en);
 
 @NgModule({
   declarations: [
@@ -52,9 +58,11 @@ import { MainCategoriesModule } from './domains/categories/main-categories.modul
     NgxsLoggerPluginModule.forRoot(),
     NgxsReduxDevtoolsPluginModule.forRoot(), // This should be the last import (at least of the ngxs imports)
     WorkoutsModule,
-    MainCategoriesModule
+    MainCategoriesModule,
+    NgZorroAntdModule,
+    FormsModule
   ],
-  providers: [],
+  providers: [{ provide: NZ_I18N, useValue: en_US }],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
