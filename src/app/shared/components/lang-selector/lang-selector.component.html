@@ -1,12 +1,20 @@
-<span class="navigation_lang_select">
+<!-- <span class="navigation_lang_select">
   <mat-menu #langSelectMenu="matMenu">
     <button mat-menu-item (click)="languageChanged('de')" class="spec-select-lang-de">DE</button>
     <button mat-menu-item (click)="languageChanged('fr')" class="spec-select-lang-fr">FR</button>
     <button mat-menu-item (click)="languageChanged('en')" class="spec-select-lang-en">EN</button>
   </mat-menu>
 
-  <button style="color: white" [matMenuTriggerFor]="langSelectMenu" class="lang_select" mat-icon-button>
+  <button style="color: black" [matMenuTriggerFor]="langSelectMenu" class="lang_select" mat-icon-button>
     {{ languageCode}}
     <mat-icon>arrow_drop_down</mat-icon>
   </button>
-</span>
+</span> -->
+
+<div>
+  <nz-select style="width: 120px;" [(ngModel)]="languageCode" (ngModelChange)="languageChanged(languageCode)" nzPlaceHolder="Language">
+    <nz-option nzValue="de" nzLabel="de"></nz-option>
+    <nz-option nzValue="en" nzLabel="en"></nz-option>
+    <nz-option nzValue="fr" nzLabel="fr"></nz-option>
+  </nz-select>
+</div>

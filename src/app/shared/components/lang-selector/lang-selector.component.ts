@@ -36,7 +36,7 @@ export class LangSelectorComponent {
         // alert('browser lang is ' + this.defaultLang);
       }
       // set display value and broadcast language
-      this.languageCode = this.defaultLang.toUpperCase();
+      this.languageCode = this.defaultLang;
       this.runtimeService.changeLanguage(this.defaultLang);
     });
   }

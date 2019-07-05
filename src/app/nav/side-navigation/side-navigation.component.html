@@ -1,10 +1,5 @@
 <nz-layout class="app-layout">
-  <nz-sider class="menu-sidebar"
-            nzCollapsible
-            nzWidth="256px"
-            nzBreakpoint="md"
-            [(nzCollapsed)]="isCollapsed"
-            [nzTrigger]="null">
+  <nz-sider class="menu-sidebar" nzCollapsible nzWidth="256px" nzBreakpoint="md" [(nzCollapsed)]="isCollapsed">
     <div class="sidebar-logo">
       <a href="https://ng.ant.design/" target="_blank">
         <img src="https://ng.ant.design/assets/img/logo.svg" alt="logo">
@@ -20,15 +15,15 @@
           <li nz-menu-item nzMatchRouter>
             <a>Monitor</a>
           </li>
-          <li nz-menu-item nzMatchRouter>
-            <a>Workplace</a>
-          </li>
         </ul>
       </li>
-      <li nz-submenu nzOpen nzTitle="Form" nzIcon="form">
+      <li nz-submenu nzOpen nzTitle="Workouts" nzIcon="database">
         <ul>
           <li nz-menu-item nzMatchRouter>
-            <a>Basic Form</a>
+            <a routerLink="/catalog">Catalog</a>
+          </li>
+          <li nz-menu-item nzMatchRouter>
+            <a>Create</a>
           </li>
         </ul>
       </li>
@@ -36,15 +31,22 @@
   </nz-sider>
   <nz-layout>
     <nz-header>
-      <div class="app-header">
-        <span class="header-trigger" (click)="isCollapsed = !isCollapsed">
-            <i class="trigger"
-               nz-icon
-               [nzType]="isCollapsed ? 'menu-unfold' : 'menu-fold'"
-            ></i>
-        </span>
+      <div fxLayout="row" fxLayoutGap="10px" class="app-header">
+        <div fxLayout="row" fxFlex="40px" fxLayoutAlign="center center" (click)="isCollapsed = !isCollapsed">
+          <i class="trigger" nz-icon [nzType]="isCollapsed ? 'menu-unfold' : 'menu-fold'"></i>
+        </div>
+
+        <!-- Spacer -->
+        <div fxLayout="row" fxFlex>
+        </div>
+
+        <div fxLayout="row" fxFlex="140px" fxLayoutAlign="right center">
+          <!-- language selector -->
+          <app-lang-selector></app-lang-selector>
+        </div>
       </div>
     </nz-header>
+
     <nz-content>
       <div class="inner-content">
         <router-outlet></router-outlet>
