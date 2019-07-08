@@ -15,8 +15,8 @@ export class WorkoutService {
 
   constructor(private http: HttpClient) { }
 
-  getAllUserWorkouts(userID: number): Observable<WorkoutListResponse> {
-    return this.http.get<APIResponse>(this.API_HOST + 'workouts').pipe(
+  getAllUserWorkouts(userID: number): Observable<any[]> {
+    return this.http.get<any>(this.API_HOST + 'workouts?user=' + userID).pipe(
       map(res => {
         return res;
       })

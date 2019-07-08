@@ -1,26 +1,51 @@
 import { WorkoutService } from './../api-services/workout.service';
 import { Workout } from '../model/workout';
-import { State, Selector, Action, StateContext, Store } from '@ngxs/store';
+import { State, Selector, Action, StateContext } from '@ngxs/store';
 import { tap } from 'rxjs/operators';
+
+// STATE MODEL
+export interface WorkoutCatalogStateModel {
+  workouts: Workout[];
+}
 
 // ACTIONS
 export class AddWorkout {
-  static readonly type = '[Workout] Add';
+  static readonly type = '[Workout] Add workout';
   constructor(public payload: Workout) {}
 }
 
 export class LoadUserWorkouts {
-  static readonly type = '[Workout] Load User Workouts';
+  static readonly type = '[Workout] Load user workouts';
   constructor(public userID: number) {}
 }
 
-// STATE MODEL
-export class WorkoutCatalogStateModel {
-  workouts: Workout[];
-}
-
 @State<WorkoutCatalogStateModel>({
-  name: 'workouts'
+  name: 'workouts',
+  defaults: {
+    workouts: [
+      {
+        id: 0,
+        workoutName: 'test',
+        energySystemID: 23,
+        energySubtypeID: 12,
+        synopsis: 'test synopsis',
+        shortDescription: 'short desc',
+        longDescription: 'long desc',
+        facilityID: 2,
+        facilityOptID: 4,
+        duration: 45,
+        experienceLevel: 2,
+        isPublic: true,
+        isActive: true,
+
+        numberOfSets: 4,
+        numberOfRepsPerSet: 12,
+        loadDurationSeconds: 120,
+        restDurationBetweenRepsSeconds: 360,
+        restDurationBetweenSetsSeconds: 600
+      }
+    ]
+  }
 })
 export class WorkoutCatalogState {
   constructor(private workoutApiService: WorkoutService) {}
@@ -38,12 +63,12 @@ export class WorkoutCatalogState {
     */
 
   @Action(LoadUserWorkouts)
-  LoadUserWorkouts(
+  loadUserWorkouts(
     ctx: StateContext<WorkoutCatalogStateModel>,
     action: LoadUserWorkouts
   ) {
     return this.workoutApiService.getAllUserWorkouts(action.userID).pipe(
-      tap((workouts: any) => {
+      tap((workouts: Workout[]) => {
         const state = ctx.getState();
         ctx.setState({
           ...state,
@@ -52,20 +77,6 @@ export class WorkoutCatalogState {
       })
     );
   }
-
-  // @Action(FeedAnimals)
-  // feedAnimals(ctx: StateContext<ZooStateModel>, action: FeedAnimals) {
-  //   return this.animalService.feed(action.animalsToFeed).pipe(tap((animalsToFeedResult) => {
-  //     const state = ctx.getState();
-  //     ctx.setState({
-  //       ...state,
-  //       feedAnimals: [
-  //         ...state.feedAnimals,
-  //         animalsToFeedResult,
-  //       ]
-  //     });
-  //   }));
-  // }
 
   @Action(AddWorkout)
   add(

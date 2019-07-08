@@ -27,6 +27,7 @@ import { NgZorroAntdModule, NZ_I18N, en_US } from 'ng-zorro-antd';
 import { FormsModule } from '@angular/forms';
 import { registerLocaleData } from '@angular/common';
 import en from '@angular/common/locales/en';
+import { WorkoutCatalogState } from './state/workouts.state';
 
 registerLocaleData(en);
 
@@ -54,7 +55,9 @@ registerLocaleData(en);
     AppRoutingModule,
     SharedModule,
     ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production }),
-    NgxsModule.forRoot([], { developmentMode: true }),
+    NgxsModule.forRoot([
+      WorkoutCatalogState
+    ], { developmentMode: true }),
     NgxsLoggerPluginModule.forRoot(),
     NgxsReduxDevtoolsPluginModule.forRoot(), // This should be the last import (at least of the ngxs imports)
     WorkoutsModule,

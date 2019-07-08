@@ -2,10 +2,33 @@
 <div fxLayout="row" fxLayoutAlign="center start">
   <div fxLayout="column" fxLayoutGap="32px" fxFlex="80">
     <h1>{{ 'CATALOG.MAIN_TITLE' | translate }}</h1>
-    <h2>{{ 'CATALOG.SUBTITLE_POWER' | translate }}</h2>
+    <!-- <h2>{{ 'CATALOG.SUBTITLE_POWER' | translate }}</h2> -->
+    <!-- <app-test-card></app-test-card>
     <app-test-card></app-test-card>
-    <app-test-card></app-test-card>
-    <app-test-card></app-test-card>
+    <app-test-card></app-test-card> -->
+
+    <nz-table #workoutTable [nzData]="userWorkoutList">
+      <thead>
+        <tr>
+          <th>Workout Name</th>
+          <th>Synopsis</th>
+          <th>Duration</th>
+          <th>Action</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let workout of workoutTable.data">
+          <td>{{ workout.workoutName }}</td>
+          <td>{{ workout.synopsis }}</td>
+          <td>{{ workout.duration }}</td>
+          <td>
+            <a>Action 一 {{ workout.workoutName }}</a>
+            <nz-divider nzType="vertical"></nz-divider>
+            <a>Delete</a>
+          </td>
+        </tr>
+      </tbody>
+    </nz-table>
  </div>
 </div>
 
