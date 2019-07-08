@@ -7,7 +7,7 @@
     <app-test-card></app-test-card>
     <app-test-card></app-test-card> -->
 
-    <nz-table #workoutTable [nzData]="userWorkoutList">
+    <nz-table #workoutTable [nzData]="workouts$ | async">
       <thead>
         <tr>
           <th>Workout Name</th>

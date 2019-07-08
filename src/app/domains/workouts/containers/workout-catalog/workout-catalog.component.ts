@@ -18,12 +18,14 @@ export class WorkoutCatalogComponent implements OnInit {
   workouts$: Observable<Workout[]>;
 
   ngOnInit() {
-    this.store.dispatch(new LoadUserWorkouts(1)).subscribe(() => {
-      console.log('dispatched!');
-    });
-    // this.workouts$ = this.store.select(state => state.workouts);
-    this.store.select(state => state.workouts).subscribe((res) => {
-      this.userWorkoutList = res.workouts;
-    });
+    // this.store.dispatch(new LoadUserWorkouts(1)).subscribe(() => {
+    //   console.log('dispatched!');
+    // });
+    this.store.dispatch(new LoadUserWorkouts(1));
+    this.workouts$ = this.store.select(state => state.workouts.workouts);
+    // Also working
+    // this.store.select(state => state.workouts).subscribe((res) => {
+    //   this.userWorkoutList = res.workouts;
+    // });
   }
 }
