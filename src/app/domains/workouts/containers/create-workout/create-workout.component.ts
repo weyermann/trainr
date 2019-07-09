@@ -41,6 +41,9 @@ export class CreateWorkoutComponent implements OnInit {
   workoutForm: FormGroup;
   energySystemOptions: any; // TODO load from api, put in store
 
+  formatterMinutes = (value: number) => `${value} Minutes`;
+  parserMinutes = (value: string) => value.replace(' Minutes', '');
+
   constructor(private fb: FormBuilder) {
 
     this.workoutForm = this.fb.group({
@@ -51,11 +54,11 @@ export class CreateWorkoutComponent implements OnInit {
       longDescription: ['', Validators.required],
       facility: ['', Validators.required],
       optionalFacility: ['', Validators.required],
-      approxDuration: ['', Validators.required],
+      approxDuration: [30, Validators.required],
       experienceLevel: [''],
 
-      defaultNumberOfSets: [''],
-      defaultNumberOfRepsPerSet: [''],
+      defaultNumberOfSets: [3],
+      defaultNumberOfRepsPerSet: [10],
       defaultLoadDurationSeconds: [''],
       defaultRestDurationBetweenRepsSeconds: [''],
       defaultRestDurationBetweenSetsSeconds: [''],

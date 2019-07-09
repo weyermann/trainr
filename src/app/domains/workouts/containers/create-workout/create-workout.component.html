@@ -79,6 +79,34 @@
         </nz-form-control>
       </nz-form-item>
 
+      <!-- Duration -->
+      <nz-form-item>
+        <nz-form-label [nzSpan]="7">Approximate workout duration</nz-form-label>
+        <nz-form-control [nzSpan]="12">
+          <nz-input-number style="width: 100%"
+          formControlName="approxDuration"
+          [nzMin]="5"
+          [nzMax]="480"
+          [nzStep]="5"
+          [nzFormatter]="formatterMinutes"
+          [nzParser]="parserMinutes"
+        ></nz-input-number>
+        </nz-form-control>
+      </nz-form-item>
+
+       <!-- Number of sets -->
+       <nz-form-item>
+        <nz-form-label [nzSpan]="7">Default number of sets</nz-form-label>
+        <nz-form-control [nzSpan]="12">
+          <nz-input-number style="width: 100%"
+          formControlName="defaultNumberOfSets"
+          [nzMin]="1"
+          [nzMax]="10"
+          [nzStep]="1"
+        ></nz-input-number>
+        </nz-form-control>
+      </nz-form-item>
+
 
       <!-- Buttons -->
       <nz-form-item>
