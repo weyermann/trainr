@@ -1,3 +1,48 @@
-<p>
-  create-workout works!
-</p>
+<div fxLayout="row" fxLayoutAlign="center start">
+  <div fxLayout="column" fxLayoutGap="32px" fxFlex="80">
+    <h1>{{ 'WORKOUT.CREATE.MAIN_TITLE' | translate }}</h1>
+
+
+    <form nz-form [formGroup]="workoutForm" (ngSubmit)="submitForm(workoutForm.value)">
+
+      <!-- Workout name -->
+      <nz-form-item>
+        <nz-form-label [nzSpan]="7" nzRequired>Workout name</nz-form-label>
+        <nz-form-control [nzSpan]="12" [nzErrorTip]="workoutNameErrorTpl">
+          <input nz-input formControlName="workoutName" placeholder="Like 'Boulder 4x4'" />
+          <ng-template #workoutNameErrorTpl let-control>
+            <ng-container *ngIf="control.hasError('required')">
+              Please input a workout name
+            </ng-container>
+          </ng-template>
+        </nz-form-control>
+      </nz-form-item>
+
+      <!-- Energy System -->
+      <nz-form-item>
+        <nz-form-label [nzSpan]="7" nzRequired>Energy system</nz-form-label>
+        <nz-form-control [nzSpan]="12" [nzErrorTip]="workoutNameErrorTpl">
+            <nz-cascader
+            [formControlName]="'energySystem'"
+            [nzExpandTrigger]="'hover'"
+            [nzOptions]="nzOptions"
+            (ngModelChange)="onChanges($event)">
+          </nz-cascader>
+        </nz-form-control>
+      </nz-form-item>
+
+      <nz-form-item>
+          <nz-form-control [nzOffset]="7" [nzSpan]="12">
+            <button nz-button nzType="primary" [disabled]="!workoutForm.valid">Submit</button>
+            <button nz-button (click)="resetForm($event)">Reset</button>
+          </nz-form-control>
+        </nz-form-item>
+
+
+
+    </form>
+
+
+
+  </div>
+</div>

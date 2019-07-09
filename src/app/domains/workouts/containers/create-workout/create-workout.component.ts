@@ -2,6 +2,30 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, ValidationErrors, Validators } from '@angular/forms';
 import { Observable, Observer } from 'rxjs';
 
+const energySystemOptions = [
+  {
+    value: 'strength_power',
+    label: 'Strength / Power',
+    isLeaf: true
+  },
+  {
+    value: 'power_endurance',
+    label: 'Power Endurance',
+    children: [
+      {
+        value: 'aerobic_power',
+        label: 'Aerobic Power',
+        isLeaf: true
+      },
+      {
+        value: 'anaerobic_capacity',
+        label: 'Anaerobic Capacity',
+        isLeaf: true
+      }
+    ]
+  }
+];
+
 @Component({
   selector: 'app-create-workout',
   templateUrl: './create-workout.component.html',
@@ -9,42 +33,36 @@ import { Observable, Observer } from 'rxjs';
 })
 export class CreateWorkoutComponent implements OnInit {
 
+  nzOptions = energySystemOptions;
+  values: any[] | null = null;
+
   workoutForm: FormGroup;
+  energySystemOptions: any; // TODO load from api, put in store
 
   constructor(private fb: FormBuilder) {
-    // TODO use right form fields
-
-    // id: number;
-    // workoutName: string;
-    // energySystemID: number;
-    // energySubtypeID: number;
-    // synopsis: string;
-    // shortDescription: string;
-    // longDescription: string;
-    // facilityID: number;
-    // facilityOptID: number;
-    // duration: number;
-    // experienceLevel: number;
-    // isPublic: boolean;
-    // isActive: boolean;
-
-    // numberOfSets: number;
-    // numberOfRepsPerSet: number;
-    // loadDurationSeconds: number;
-    // restDurationBetweenRepsSeconds: number;
-    // restDurationBetweenSetsSeconds: number;
-
 
     this.workoutForm = this.fb.group({
-      userName: ['', [Validators.required]],
-      email: ['', [Validators.required]],
-      password: ['', [Validators.required]],
-      confirm: [''],
-      comment: ['', [Validators.required]]
+      workoutName: ['', Validators.required],
+      energySystem: ['', Validators.required],
+      synopsis: ['', Validators.required],
+      shortDescription: ['', Validators.required],
+      longDescription: ['', Validators.required],
+      facility: ['', Validators.required],
+      optionalFacility: ['', Validators.required],
+      approxDuration: ['', Validators.required],
+      experienceLevel: [''],
+
+      defaultNumberOfSets: [''],
+      defaultNumberOfRepsPerSet: [''],
+      defaultLoadDurationSeconds: [''],
+      defaultRestDurationBetweenRepsSeconds: [''],
+      defaultRestDurationBetweenSetsSeconds: [''],
     });
   }
 
   ngOnInit() {
+
+
   }
 
   submitForm(value: any): void {
@@ -64,6 +82,10 @@ export class CreateWorkoutComponent implements OnInit {
       this.workoutForm.controls[key].markAsPristine();
       this.workoutForm.controls[key].updateValueAndValidity();
     }
+  }
+
+  onChanges(values: any): void {
+    console.log(values, this.values);
   }
 
 }
