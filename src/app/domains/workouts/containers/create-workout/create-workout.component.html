@@ -22,21 +22,71 @@
       <nz-form-item>
         <nz-form-label [nzSpan]="7" nzRequired>Energy system</nz-form-label>
         <nz-form-control [nzSpan]="12" [nzErrorTip]="workoutNameErrorTpl">
-            <nz-cascader
-            [formControlName]="'energySystem'"
-            [nzExpandTrigger]="'hover'"
-            [nzOptions]="nzOptions"
+          <nz-cascader [formControlName]="'energySystem'" [nzExpandTrigger]="'hover'" [nzOptions]="nzOptions"
             (ngModelChange)="onChanges($event)">
           </nz-cascader>
         </nz-form-control>
       </nz-form-item>
 
+      <!-- Synopsis -->
       <nz-form-item>
-          <nz-form-control [nzOffset]="7" [nzSpan]="12">
-            <button nz-button nzType="primary" [disabled]="!workoutForm.valid">Submit</button>
-            <button nz-button (click)="resetForm($event)">Reset</button>
-          </nz-form-control>
-        </nz-form-item>
+        <nz-form-label [nzSpan]="7" nzRequired>Workout in one sentence</nz-form-label>
+        <nz-form-control [nzSpan]="12" [nzErrorTip]="synopsisErrorTpl">
+          <input nz-input formControlName="workoutName"
+            placeholder="'4 sets of 4 different boulders in a row, 10 minutes rest between sets'" />
+          <ng-template #synopsisErrorTpl let-control>
+            <ng-container *ngIf="control.hasError('required')">
+              Please input a workout synopsis
+            </ng-container>
+          </ng-template>
+        </nz-form-control>
+      </nz-form-item>
+
+      <!-- Short description -->
+      <nz-form-item>
+        <nz-form-label [nzSpan]="7" nzRequired>Short description</nz-form-label>
+        <nz-form-control [nzSpan]="12" [nzErrorTip]="shortDescErrorTpl">
+          <textarea nz-input [nzAutosize]="{ minRows: 2, maxRows: 10 }" formControlName="shortDescription"
+            placeholder="'Choose a set of 4 different boulders, that are medium difficulty for you [...]'">
+          </textarea>
+          <ng-template #shortDescErrorTpl let-control>
+            <ng-container *ngIf="control.hasError('required')">
+              Please input a short description
+            </ng-container>
+          </ng-template>
+        </nz-form-control>
+      </nz-form-item>
+
+      <!-- Long description -->
+      <nz-form-item>
+        <nz-form-label [nzSpan]="7">Long description</nz-form-label>
+        <nz-form-control [nzSpan]="12">
+          <textarea nz-input [nzAutosize]="{ minRows: 3, maxRows: 50 }" formControlName="longDescription"
+            placeholder="'The goal of this workout is to increase local anaerobic endurance through repetition of [...]. This workout should be performed in endurance cycles [...]'">
+          </textarea>
+        </nz-form-control>
+      </nz-form-item>
+
+      <!-- Locations -->
+      <nz-form-item>
+        <nz-form-label [nzSpan]="7">Location(s)</nz-form-label>
+        <nz-form-control [nzSpan]="12">
+          <nz-select style="width: 100%" formControlName="facility" nzMode="multiple" nzPlaceHolder="Select one or many appropriate locations">
+            <ng-container *ngFor="let option of locationOptions">
+              <nz-option [nzLabel]="option" [nzValue]="option"></nz-option>
+            </ng-container>
+          </nz-select>
+        </nz-form-control>
+      </nz-form-item>
+
+
+      <!-- Buttons -->
+      <nz-form-item>
+        <nz-form-control [nzOffset]="7" [nzSpan]="12">
+          <button nz-button nzType="primary" [disabled]="!workoutForm.valid">Submit</button>
+          <button nz-button (click)="resetForm($event)">Reset</button>
+        </nz-form-control>
+      </nz-form-item>
 
 
 

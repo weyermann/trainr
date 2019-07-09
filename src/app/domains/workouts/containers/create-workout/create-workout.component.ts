@@ -36,6 +36,8 @@ export class CreateWorkoutComponent implements OnInit {
   nzOptions = energySystemOptions;
   values: any[] | null = null;
 
+  locationOptions: string[];
+
   workoutForm: FormGroup;
   energySystemOptions: any; // TODO load from api, put in store
 
@@ -61,8 +63,7 @@ export class CreateWorkoutComponent implements OnInit {
   }
 
   ngOnInit() {
-
-
+    this.locationOptions = ['Climbing gym', 'Bouldering gym', 'Home wall', 'Fitness club', 'Crag', 'Outdoor boulder area'];
   }
 
   submitForm(value: any): void {
@@ -76,6 +77,8 @@ export class CreateWorkoutComponent implements OnInit {
 
   resetForm(e: MouseEvent): void {
     e.preventDefault();
+    console.log('Form before reset: ');
+    console.log(this.workoutForm.value);
     this.workoutForm.reset();
     // tslint:disable-next-line:forin
     for (const key in this.workoutForm.controls) {
