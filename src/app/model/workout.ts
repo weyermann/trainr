@@ -1,25 +1,34 @@
-export interface Workout {
-  id: number;
+export class Workout {
+  // id: number;
+  userID: number;
   workoutName: string;
-  energySystemID: number;
-  energySubtypeID: number;
+  energySystemName: string;
+  energySubtypeName: string;
   synopsis: string;
   shortDescription: string;
   longDescription: string;
-  facilityID: number;
-  facilityOptID: number;
+  facilities: Facility[];
   duration: number;
   experienceLevel: number;
-  isPublic: boolean;
-  isActive: boolean;
+  public: boolean;
+  active: boolean;
 
-  numberOfSets: number;
-  numberOfRepsPerSet: number;
-  loadDurationSeconds: number;
-  restDurationBetweenRepsSeconds: number;
-  restDurationBetweenSetsSeconds: number;
+  defNumberOfSets: number;
+  defNumberOfRepsPerSet: number;
+  defLoadDurationSeconds: number;
+  defRestDurationBetweenRepsSeconds: number;
+  defRestDurationBetweenSetsSeconds: number;
+
+  public constructor(init?: Partial<Workout>) {
+    Object.assign(this, init);
+  }
 }
 
 export interface WorkoutListResponse {
   data: Workout[];
+}
+
+export interface Facility {
+  id: number;
+  name: string;
 }

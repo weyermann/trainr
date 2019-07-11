@@ -21,10 +21,15 @@
       <!-- Energy System -->
       <nz-form-item>
         <nz-form-label [nzSpan]="7" nzRequired>Energy system</nz-form-label>
-        <nz-form-control [nzSpan]="12" [nzErrorTip]="workoutNameErrorTpl">
+        <nz-form-control [nzSpan]="12" [nzErrorTip]="energySystemErrorTpl">
           <nz-cascader [formControlName]="'energySystem'" [nzExpandTrigger]="'hover'" [nzOptions]="nzOptions"
             (ngModelChange)="onChanges($event)">
           </nz-cascader>
+          <ng-template #energySystemErrorTpl let-control>
+            <ng-container *ngIf="control.hasError('required')">
+              Please select an energy system
+            </ng-container>
+          </ng-template>
         </nz-form-control>
       </nz-form-item>
 
@@ -32,7 +37,7 @@
       <nz-form-item>
         <nz-form-label [nzSpan]="7" nzRequired>Workout in one sentence</nz-form-label>
         <nz-form-control [nzSpan]="12" [nzErrorTip]="synopsisErrorTpl">
-          <input nz-input formControlName="workoutName"
+          <input nz-input formControlName="synopsis"
             placeholder="'4 sets of 4 different boulders in a row, 10 minutes rest between sets'" />
           <ng-template #synopsisErrorTpl let-control>
             <ng-container *ngIf="control.hasError('required')">
@@ -71,8 +76,22 @@
       <nz-form-item>
         <nz-form-label [nzSpan]="7">Location(s)</nz-form-label>
         <nz-form-control [nzSpan]="12">
-          <nz-select style="width: 100%" formControlName="facility" nzMode="multiple" nzPlaceHolder="Select one or many appropriate locations">
+          <nz-select style="width: 100%" formControlName="facility" nzMode="multiple"
+            nzPlaceHolder="Select one or many appropriate locations">
             <ng-container *ngFor="let option of locationOptions">
+              <nz-option [nzLabel]="option" [nzValue]="option"></nz-option>
+            </ng-container>
+          </nz-select>
+        </nz-form-control>
+      </nz-form-item>
+
+      <!-- Experience level -->
+      <nz-form-item>
+        <nz-form-label [nzSpan]="7">Recommended experience level</nz-form-label>
+        <nz-form-control [nzSpan]="12">
+          <nz-select style="width: 100%" formControlName="experienceLevel"
+            nzPlaceHolder="Recommended for this experience level">
+            <ng-container *ngFor="let option of experienceOptions">
               <nz-option [nzLabel]="option" [nzValue]="option"></nz-option>
             </ng-container>
           </nz-select>
@@ -81,29 +100,55 @@
 
       <!-- Duration -->
       <nz-form-item>
-        <nz-form-label [nzSpan]="7">Approximate workout duration</nz-form-label>
-        <nz-form-control [nzSpan]="12">
-          <nz-input-number style="width: 100%"
-          formControlName="approxDuration"
-          [nzMin]="5"
-          [nzMax]="480"
-          [nzStep]="5"
-          [nzFormatter]="formatterMinutes"
-          [nzParser]="parserMinutes"
-        ></nz-input-number>
+        <nz-form-label [nzSpan]="7">Approximate total workout duration (minutes)</nz-form-label>
+        <nz-form-control [nzSpan]="6">
+          <nz-input-number style="width: 100%" formControlName="approxDuration" [nzMin]="5" [nzMax]="480" [nzStep]="5">
+          </nz-input-number>
         </nz-form-control>
       </nz-form-item>
 
-       <!-- Number of sets -->
-       <nz-form-item>
+      <!-- Number of sets -->
+      <nz-form-item>
         <nz-form-label [nzSpan]="7">Default number of sets</nz-form-label>
-        <nz-form-control [nzSpan]="12">
-          <nz-input-number style="width: 100%"
-          formControlName="defaultNumberOfSets"
-          [nzMin]="1"
-          [nzMax]="10"
-          [nzStep]="1"
-        ></nz-input-number>
+        <nz-form-control [nzSpan]="6">
+          <nz-input-number style="width: 100%" formControlName="defaultNumberOfSets" [nzMin]="1" [nzMax]="20"
+            [nzStep]="1"></nz-input-number>
+        </nz-form-control>
+      </nz-form-item>
+
+      <!-- Number of reps per set -->
+      <nz-form-item>
+        <nz-form-label [nzSpan]="7">Default number of reps per sets</nz-form-label>
+        <nz-form-control [nzSpan]="6">
+          <nz-input-number style="width: 100%" formControlName="defaultNumberOfRepsPerSet" [nzMin]="1" [nzMax]="50"
+            [nzStep]="1"></nz-input-number>
+        </nz-form-control>
+      </nz-form-item>
+
+      <!-- Load duration -->
+      <nz-form-item>
+        <nz-form-label [nzSpan]="7">Default load duration (seconds)</nz-form-label>
+        <nz-form-control [nzSpan]="6">
+          <nz-input-number style="width: 100%" formControlName="defaultLoadDurationSeconds" [nzMin]="1" [nzMax]="50"
+            [nzStep]="1"></nz-input-number>
+        </nz-form-control>
+      </nz-form-item>
+
+      <!-- Rest duration between reps -->
+      <nz-form-item>
+        <nz-form-label [nzSpan]="7">Default rest duration between reps (seconds)</nz-form-label>
+        <nz-form-control [nzSpan]="6">
+          <nz-input-number style="width: 100%" formControlName="defaultRestDurationBetweenRepsSeconds" [nzMin]="1"
+            [nzMax]="360" [nzStep]="1"></nz-input-number>
+        </nz-form-control>
+      </nz-form-item>
+
+      <!-- Rest duration between sets -->
+      <nz-form-item>
+        <nz-form-label [nzSpan]="7">Default rest duration between sets (seconds)</nz-form-label>
+        <nz-form-control [nzSpan]="6">
+          <nz-input-number style="width: 100%" formControlName="defaultRestDurationBetweenSetsSeconds" [nzMin]="1"
+            [nzMax]="600" [nzStep]="1"></nz-input-number>
         </nz-form-control>
       </nz-form-item>
 
@@ -111,7 +156,9 @@
       <!-- Buttons -->
       <nz-form-item>
         <nz-form-control [nzOffset]="7" [nzSpan]="12">
+          <!-- <button nz-button nzType="primary" [disabled]="!workoutForm.valid">Submit</button> -->
           <button nz-button nzType="primary" [disabled]="!workoutForm.valid">Submit</button>
+          <button nz-button nzType="accent">Submit Fake workout</button>
           <button nz-button (click)="resetForm($event)">Reset</button>
         </nz-form-control>
       </nz-form-item>

@@ -24,25 +24,24 @@ export class LoadUserWorkouts {
   defaults: {
     workouts: [
       {
-        id: 0,
+        userID: 1,
         workoutName: 'test',
-        energySystemID: 23,
-        energySubtypeID: 12,
+        energySystemName: 'Power endurance',
+        energySubtypeName: 'Anaerobic capacity',
         synopsis: 'test synopsis',
         shortDescription: 'short desc',
         longDescription: 'long desc',
-        facilityID: 2,
-        facilityOptID: 4,
+        facilities: [],
         duration: 45,
         experienceLevel: 2,
-        isPublic: true,
-        isActive: true,
+        public: true,
+        active: true,
 
-        numberOfSets: 4,
-        numberOfRepsPerSet: 12,
-        loadDurationSeconds: 120,
-        restDurationBetweenRepsSeconds: 360,
-        restDurationBetweenSetsSeconds: 600
+        defNumberOfSets: 4,
+        defNumberOfRepsPerSet: 12,
+        defLoadDurationSeconds: 120,
+        defRestDurationBetweenRepsSeconds: 360,
+        defRestDurationBetweenSetsSeconds: 600
       }
     ]
   }
@@ -79,13 +78,27 @@ export class WorkoutCatalogState {
   }
 
   @Action(AddWorkout)
-  add(
+  addWorkout(
     { getState, patchState }: StateContext<WorkoutCatalogStateModel>,
     { payload }: AddWorkout
   ) {
-    const state = getState();
-    patchState({
-      workouts: [...state.workouts, payload]
-    });
+    return this.workoutApiService.addUserWorkout(payload).pipe(
+      tap((result) => {
+        const state = getState();
+        patchState({
+          workouts: [...state.workouts, result]
+        });
+      })
+    );
   }
+
+  // @Action(AddTodo)
+  //   addTodo({getState, patchState}: StateContext<TodoStateModel>, {payload}: AddTodo) {
+  //       return this.todoService.addTodo(payload).pipe(tap((result) => {
+  //           const state = getState();
+  //           patchState({
+  //               todos: [...state.todos, result]
+  //           });
+  //       }));
+  //   }
 }
