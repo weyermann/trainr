@@ -91,14 +91,4 @@ export class WorkoutCatalogState {
       })
     );
   }
-
-  // @Action(AddTodo)
-  //   addTodo({getState, patchState}: StateContext<TodoStateModel>, {payload}: AddTodo) {
-  //       return this.todoService.addTodo(payload).pipe(tap((result) => {
-  //           const state = getState();
-  //           patchState({
-  //               todos: [...state.todos, result]
-  //           });
-  //       }));
-  //   }
 }

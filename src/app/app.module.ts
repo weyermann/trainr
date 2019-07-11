@@ -28,6 +28,7 @@ import { FormsModule } from '@angular/forms';
 import { registerLocaleData } from '@angular/common';
 import en from '@angular/common/locales/en';
 import { WorkoutCatalogState } from './state/workouts.state';
+import { SharedState } from './state/shared.state';
 
 registerLocaleData(en);
 
@@ -56,7 +57,8 @@ registerLocaleData(en);
     SharedModule,
     ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production }),
     NgxsModule.forRoot([
-      WorkoutCatalogState
+      WorkoutCatalogState,
+      SharedState,
     ], { developmentMode: true }),
     NgxsLoggerPluginModule.forRoot(),
     NgxsReduxDevtoolsPluginModule.forRoot(), // This should be the last import (at least of the ngxs imports)
