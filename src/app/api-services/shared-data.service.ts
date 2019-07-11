@@ -19,4 +19,12 @@ export class SharedDataService {
       })
     );
   }
+
+  LoadEnergySystems(): Observable<any[]> {
+    return this.http.get<any>(this.API_HOST + `list/energysystems`).pipe(
+      map(res => {
+        return res;
+      })
+    );
+  }
 }

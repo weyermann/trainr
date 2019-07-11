@@ -19,12 +19,29 @@
       </nz-form-item>
 
       <!-- Energy System -->
-      <nz-form-item>
+      <!-- <nz-form-item>
         <nz-form-label [nzSpan]="7" nzRequired>Energy system</nz-form-label>
         <nz-form-control [nzSpan]="12" [nzErrorTip]="energySystemErrorTpl">
           <nz-cascader [formControlName]="'energySystem'" [nzExpandTrigger]="'hover'" [nzOptions]="nzOptions"
             (ngModelChange)="onChanges($event)">
           </nz-cascader>
+          <ng-template #energySystemErrorTpl let-control>
+            <ng-container *ngIf="control.hasError('required')">
+              Please select an energy system
+            </ng-container>
+          </ng-template>
+        </nz-form-control>
+      </nz-form-item> -->
+
+      <nz-form-item>
+        <nz-form-label [nzSpan]="7">Energy system</nz-form-label>
+        <nz-form-control [nzSpan]="12" [nzErrorTip]="energySystemErrorTpl">
+          <nz-select style="width: 100%" formControlName="energySystem"
+            nzPlaceHolder="Select an energy system">
+            <ng-container *ngFor="let option of energySystemOptions | async">
+              <nz-option [nzLabel]="option.description" [nzValue]="option.id"></nz-option>
+            </ng-container>
+          </nz-select>
           <ng-template #energySystemErrorTpl let-control>
             <ng-container *ngIf="control.hasError('required')">
               Please select an energy system
@@ -72,14 +89,14 @@
         </nz-form-control>
       </nz-form-item>
 
-      <!-- Locations -->
+      <!-- Facilities -->
       <nz-form-item>
         <nz-form-label [nzSpan]="7">Facilities</nz-form-label>
         <nz-form-control [nzSpan]="12">
           <nz-select style="width: 100%" formControlName="facility" nzMode="multiple"
             nzPlaceHolder="Select one or many appropriate locations">
-            <ng-container *ngFor="let option of locationOptions">
-              <nz-option [nzLabel]="option" [nzValue]="option"></nz-option>
+            <ng-container *ngFor="let option of locationOptions | async">
+              <nz-option [nzLabel]="option.description" [nzValue]="option.id"></nz-option>
             </ng-container>
           </nz-select>
         </nz-form-control>

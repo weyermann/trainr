@@ -1,14 +1,8 @@
 import { State, Selector, Action, StateContext } from '@ngxs/store';
 import { SharedDataService } from '../api-services/shared-data.service';
 import { tap } from 'rxjs/operators';
+import { ListItem } from '../shared/interfaces/interfaces';
 
-/*
- HELPERS
-*/
-export interface ListItem {
-  ID: number;
-  Description: string;
-}
 
 /*
  ACTIONS
@@ -18,8 +12,8 @@ export class LoadFacilities {
   constructor() {}
 }
 
-export class LoadEnergyTypes {
-  static readonly type = '[Shared] LoadEnergyTypes';
+export class LoadEnergySystems {
+  static readonly type = '[Shared] LoadEnergySystems';
   constructor() {}
 }
 
@@ -28,7 +22,7 @@ export class LoadEnergyTypes {
 */
 export interface SharedStateModel {
   facilities: ListItem[];
-  energyTypes: ListItem[];
+  energySystems: ListItem[];
 }
 
 @State<SharedStateModel>({
@@ -36,14 +30,14 @@ export interface SharedStateModel {
   defaults: {
     facilities: [
       {
-        ID: 1,
-        Description: 'Testfacility'
+        id: 1,
+        description: 'Testfacility'
       }
     ],
-    energyTypes: [
+    energySystems: [
       {
-        ID: 1,
-        Description: 'Testenergytype'
+        id: 1,
+        description: 'Testenergytype'
       }
     ]
   }
@@ -59,6 +53,11 @@ export class SharedState {
     return state.facilities;
   }
 
+  @Selector()
+  static getEnergySystems(state: SharedStateModel) {
+    return state.energySystems;
+  }
+
   /*
    REDUCERS
   */
@@ -70,6 +69,19 @@ export class SharedState {
         ctx.setState({
           ...state,
           facilities: res
+        });
+      })
+    );
+  }
+
+  @Action(LoadEnergySystems)
+  loadEnergySystems(ctx: StateContext<SharedStateModel>) {
+    return this.sharedService.LoadEnergySystems().pipe(
+      tap((res: ListItem[]) => {
+        const state = ctx.getState();
+        ctx.setState({
+          ...state,
+          energySystems: res
         });
       })
     );

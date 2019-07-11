@@ -2,7 +2,7 @@ import { Store } from '@ngxs/store';
 import { RuntimeService } from './services/runtime.service';
 import { Component, OnInit } from '@angular/core';
 import { TranslateService } from '@ngx-translate/core';
-import { LoadFacilities } from './state/shared.state';
+import { LoadFacilities, LoadEnergySystems } from './state/shared.state';
 
 @Component({
   selector: 'app-root',
@@ -26,5 +26,6 @@ export class AppComponent implements OnInit {
 
   ngOnInit() {
     this.store.dispatch(new LoadFacilities());
+    this.store.dispatch(new LoadEnergySystems());
   }
 }

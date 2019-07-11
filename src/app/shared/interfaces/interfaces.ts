@@ -6,3 +6,9 @@ export interface BasicSelect {
 export interface APIResponse {
   data: any;
 }
+
+
+export interface ListItem {
+  id: number;
+  description: string;
+}
