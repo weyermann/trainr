@@ -6,6 +6,7 @@ import { Observable, Observer } from 'rxjs';
 import { Store } from '@ngxs/store';
 import { SharedState } from 'src/app/state/shared.state';
 import { ListItem } from 'src/app/shared/interfaces/interfaces';
+import { map } from 'rxjs/operators';
 
 // const energySystemOptions = [
 //   {
@@ -40,9 +41,14 @@ export class CreateWorkoutComponent implements OnInit {
 
   values: any[] | null = null;
 
-  energySystemOptions: Observable<ListItem[]>;
-  locationOptions: Observable<ListItem[]>;
+  // Observable lists
+  energySystemOptions$: Observable<ListItem[]>;
+  locationOptions$: Observable<ListItem[]>;
+  experienceLevelOptions$: Observable<ListItem[]>;
+
+  // Lookup values
   experienceOptions: string[];
+  locationOptions: ListItem[] = [];
 
   workoutForm: FormGroup;
 
@@ -57,24 +63,32 @@ export class CreateWorkoutComponent implements OnInit {
       synopsis: ['', Validators.required],
       shortDescription: ['', Validators.required],
       longDescription: [''],
-      facility: ['', Validators.required],
-      approxDuration: [30, Validators.required],
-      experienceLevel: [''],
+      facilities: [Validators.required],
+      duration: [30, Validators.required],
+      experienceLevel: [],
 
-      defaultNumberOfSets: [3],
-      defaultNumberOfRepsPerSet: [10],
-      defaultLoadDurationSeconds: [5],
-      defaultRestDurationBetweenRepsSeconds: [120],
-      defaultRestDurationBetweenSetsSeconds: [300],
+      defNumberOfSets: [3],
+      defNumberOfRepsPerSet: [10],
+      defLoadDurationSeconds: [5],
+      defRestDurationBetweenRepsSeconds: [120],
+      defRestDurationBetweenSetsSeconds: [300],
     });
   }
 
   ngOnInit() {
-    // this.locationOptions = ['Climbing gym', 'Bouldering gym', 'Home wall', 'Fitness club', 'Crag', 'Outdoor boulder area'];
-    this.experienceOptions = ['Beginner', 'Advanced', 'Expert'];
+    this.locationOptions$ = this.store.select(SharedState.getFacilities);
+    this.energySystemOptions$ = this.store.select(SharedState.getEnergySystems);
+    this.experienceLevelOptions$ = this.store.select(SharedState.getExperienceLevels);
 
-    this.locationOptions = this.store.select(SharedState.getFacilities);
-    this.energySystemOptions = this.store.select(SharedState.getEnergySystems);
+    // We need a static object for payload mapping
+    this.locationOptions$
+      .pipe(
+        map(l => {
+          this.locationOptions = l;
+          console.log('Location options:', l);
+        })
+      ).subscribe();
+
   }
 
   submitForm(formvalue: any): void {
@@ -84,6 +98,19 @@ export class CreateWorkoutComponent implements OnInit {
       this.workoutForm.controls[key].updateValueAndValidity();
     }
     console.log(formvalue);
+
+    // expand the facilities array of numbers to array of objects
+    const facilityObjects = [];
+    for (let f = 1; f < formvalue.facilities.length; f++) {
+      const facilityName = this.locationOptions.find(x => x.id === formvalue.facilities[f]).description;
+      console.log('Facility name', facilityName);
+      facilityObjects.push({
+        id: formvalue.facilities[f],
+        description: facilityName
+      });
+    }
+    formvalue.facilities = facilityObjects;
+
 
     // Send to API
     const workoutPost = new Workout(formvalue);
@@ -108,9 +135,46 @@ export class CreateWorkoutComponent implements OnInit {
     //   'userID': 1
     // };
 
+//     approxDuration: 30
+// defaultLoadDurationSeconds: 5
+// defaultNumberOfRepsPerSet: 10
+// defaultNumberOfSets: 3
+// defaultRestDurationBetweenRepsSeconds: 120
+// defaultRestDurationBetweenSetsSeconds: 300
+// energySystem: 1
+// experienceLevel: 2
+// facility: Array(3)
+// 0: ""
+// 1: 1
+// 2: 4
+// length: 3
+// __proto__: Array(0)
+// longDescription: "fasdf"
+// shortDescription: "asdfas"
+// synopsis: "one csesdf"
+// userID: 1
+// workoutName: "boulder xsx"
+
     // TODO add userID property
     workoutPost.userID = 1;
-    this.store.dispatch(new AddWorkout(workoutPost));
+    workoutPost.active = true;
+    workoutPost.public = false;
+
+    // expand the facilities array of numbers to array of objects
+    // const facilityObjects = [];
+    // for (let f = 1; f < workoutPost.facilities.length; f++) {
+    //   const facilityName = this.locationOptions.find(x => x.id === workoutPost.facilities[f].id).description;
+    //   console.log('Facility name', facilityName);
+    //   facilityObjects.push({
+    //     id: f,
+    //     description: facilityName
+    //   });
+    // }
+    // workoutPost.facilities = facilityObjects;
+
+    if (this.workoutForm.valid) {
+      this.store.dispatch(new AddWorkout(workoutPost));
+    }
   }
 
   resetForm(e: MouseEvent): void {

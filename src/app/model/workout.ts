@@ -2,8 +2,8 @@ export class Workout {
   // id: number;
   userID: number;
   workoutName: string;
-  energySystemName: string;
-  energySubtypeName: string;
+  energySystem: number;
+  energySubtype: number;
   synopsis: string;
   shortDescription: string;
   longDescription: string;
@@ -30,5 +30,5 @@ export interface WorkoutListResponse {
 
 export interface Facility {
   id: number;
-  name: string;
+  description: string;
 }

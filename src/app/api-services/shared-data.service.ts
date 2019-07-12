@@ -27,4 +27,12 @@ export class SharedDataService {
       })
     );
   }
+
+  LoadExperienceLevels(): Observable<any[]> {
+    return this.http.get<any>(this.API_HOST + `list/experiencelevels`).pipe(
+      map(res => {
+        return res;
+      })
+    );
+  }
 }

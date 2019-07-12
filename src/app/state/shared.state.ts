@@ -17,12 +17,18 @@ export class LoadEnergySystems {
   constructor() {}
 }
 
+export class LoadExperienceLevels {
+  static readonly type = '[Shared] LoadExperienceLevels';
+  constructor() {}
+}
+
 /*
  STATE MODEL
 */
 export interface SharedStateModel {
   facilities: ListItem[];
   energySystems: ListItem[];
+  experienceLevels: ListItem[];
 }
 
 @State<SharedStateModel>({
@@ -38,6 +44,12 @@ export interface SharedStateModel {
       {
         id: 1,
         description: 'Testenergytype'
+      }
+    ],
+    experienceLevels: [
+      {
+        id: 1,
+        description: 'Testexplevel'
       }
     ]
   }
@@ -56,6 +68,11 @@ export class SharedState {
   @Selector()
   static getEnergySystems(state: SharedStateModel) {
     return state.energySystems;
+  }
+
+  @Selector()
+  static getExperienceLevels(state: SharedStateModel) {
+    return state.experienceLevels;
   }
 
   /*
@@ -82,6 +99,19 @@ export class SharedState {
         ctx.setState({
           ...state,
           energySystems: res
+        });
+      })
+    );
+  }
+
+  @Action(LoadExperienceLevels)
+  loadExperienceLevels(ctx: StateContext<SharedStateModel>) {
+    return this.sharedService.LoadExperienceLevels().pipe(
+      tap((res: ListItem[]) => {
+        const state = ctx.getState();
+        ctx.setState({
+          ...state,
+          experienceLevels: res
         });
       })
     );

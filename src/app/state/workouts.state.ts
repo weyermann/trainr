@@ -26,8 +26,8 @@ export class LoadUserWorkouts {
       {
         userID: 1,
         workoutName: 'test',
-        energySystemName: 'Power endurance',
-        energySubtypeName: 'Anaerobic capacity',
+        energySystem: 0,
+        energySubtype: 0,
         synopsis: 'test synopsis',
         shortDescription: 'short desc',
         longDescription: 'long desc',
@@ -35,7 +35,7 @@ export class LoadUserWorkouts {
         duration: 45,
         experienceLevel: 2,
         public: true,
-        active: true,
+        active: false,
 
         defNumberOfSets: 4,
         defNumberOfRepsPerSet: 12,
