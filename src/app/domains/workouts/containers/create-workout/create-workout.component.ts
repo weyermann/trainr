@@ -1,3 +1,4 @@
+import { AppService } from './../../../../services/app.service';
 import { Workout } from './../../../../model/workout';
 import { AddWorkout } from './../../../../state/workouts.state';
 import { Component, OnInit } from '@angular/core';
@@ -57,7 +58,8 @@ export class CreateWorkoutComponent implements OnInit {
   constructor(
     private fb: FormBuilder,
     private store: Store,
-    private router: Router) {
+    private router: Router,
+    private appService: AppService) {
 
     this.workoutForm = this.fb.group({
       workoutName: ['', Validators.required],
@@ -122,7 +124,8 @@ export class CreateWorkoutComponent implements OnInit {
 
     if (this.workoutForm.valid) {
       this.store.dispatch(new AddWorkout(workoutPost)).subscribe(() => {
-        // clear form and do navigation when finished
+        // clear form and do navigation when action finished
+        this.appService.displaySuccessMessage('Workout created');
         this.workoutForm.reset();
         this.router.navigateByUrl('/catalog');
       });
