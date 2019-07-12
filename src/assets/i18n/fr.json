@@ -1,6 +1,12 @@
 {
-  "CATALOG": {
+  "WORKOUT": {
+    "CATALOG": {
       "MAIN_TITLE": "Tous les exercises",
       "SUBTITLE_POWER": "Force"
+    },
+    "CREATE": {
+      "MAIN_TITLE": "Create workout"
+    }
   }
 }
+
