@@ -18,11 +18,11 @@
       </thead>
       <tbody>
         <tr *ngFor="let workout of workoutTable.data">
-          <td>{{ workout.workoutName }}</td>
-          <td>{{ workout.synopsis }}</td>
-          <td>{{ workout.duration }}</td>
+          <td>{{ workout?.workoutName }}</td>
+          <td>{{ workout?.synopsis }}</td>
+          <td>{{ workout?.duration }}</td>
           <td>
-            <a>Action 一 {{ workout.workoutName }}</a>
+            <a>Action 一 {{ workout?.workoutName }}</a>
             <nz-divider nzType="vertical"></nz-divider>
             <a>Delete</a>
           </td>

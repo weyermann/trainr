@@ -146,7 +146,7 @@
       <nz-form-item>
         <nz-form-label [nzSpan]="7">Default load duration (seconds)</nz-form-label>
         <nz-form-control [nzSpan]="6">
-          <nz-input-number style="width: 100%" formControlName="defLoadDurationSeconds" [nzMin]="1" [nzMax]="50"
+          <nz-input-number style="width: 100%" formControlName="defLoadDurationSeconds" [nzMin]="0" [nzMax]="3600"
             [nzStep]="1"></nz-input-number>
         </nz-form-control>
       </nz-form-item>
@@ -165,7 +165,7 @@
         <nz-form-label [nzSpan]="7">Default rest duration between sets (seconds)</nz-form-label>
         <nz-form-control [nzSpan]="6">
           <nz-input-number style="width: 100%" formControlName="defRestDurationBetweenSetsSeconds" [nzMin]="1"
-            [nzMax]="600" [nzStep]="1"></nz-input-number>
+            [nzMax]="1800" [nzStep]="1"></nz-input-number>
         </nz-form-control>
       </nz-form-item>
 

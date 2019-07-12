@@ -7,6 +7,7 @@ import { Store } from '@ngxs/store';
 import { SharedState } from 'src/app/state/shared.state';
 import { ListItem } from 'src/app/shared/interfaces/interfaces';
 import { map } from 'rxjs/operators';
+import { Router } from '@angular/router';
 
 // const energySystemOptions = [
 //   {
@@ -55,7 +56,8 @@ export class CreateWorkoutComponent implements OnInit {
 
   constructor(
     private fb: FormBuilder,
-    private store: Store) {
+    private store: Store,
+    private router: Router) {
 
     this.workoutForm = this.fb.group({
       workoutName: ['', Validators.required],
@@ -112,68 +114,18 @@ export class CreateWorkoutComponent implements OnInit {
     formvalue.facilities = facilityObjects;
 
 
-    // Send to API
+    // Create workout to post and add missing (yet) static properties
     const workoutPost = new Workout(formvalue);
-
-    // const fakeWorkout: Workout = {
-    //   'workoutName': 'Fake Insert Test 3',
-    //   'energySystemName': 'Strength and Power',
-    //   'energySubtypeName': 'Bouldering',
-    //   'synopsis': 'Hard problems using a training board',
-    //   'shortDescription': 'Executing 10 different boulder problems at two difficulty levels on a bouldering wall or training board.',
-    //   'longDescription': 'This is going to become the very long description',
-    //   'facilities': [{'id': 7, 'name': 'Custom facility 1'}, {'id': 8, 'name': 'Custom facility 2'}],
-    //   'duration': 40,
-    //   'active': true,
-    //   'public': true,
-    //   'experienceLevel': 1,
-    //   'defNumberOfSets': 10,
-    //   'defNumberOfRepsPerSet': 10,
-    //   'defLoadDurationSeconds': 240,
-    //   'defRestDurationBetweenRepsSeconds': 60,
-    //   'defRestDurationBetweenSetsSeconds': 180,
-    //   'userID': 1
-    // };
-
-//     approxDuration: 30
-// defaultLoadDurationSeconds: 5
-// defaultNumberOfRepsPerSet: 10
-// defaultNumberOfSets: 3
-// defaultRestDurationBetweenRepsSeconds: 120
-// defaultRestDurationBetweenSetsSeconds: 300
-// energySystem: 1
-// experienceLevel: 2
-// facility: Array(3)
-// 0: ""
-// 1: 1
-// 2: 4
-// length: 3
-// __proto__: Array(0)
-// longDescription: "fasdf"
-// shortDescription: "asdfas"
-// synopsis: "one csesdf"
-// userID: 1
-// workoutName: "boulder xsx"
-
-    // TODO add userID property
     workoutPost.userID = 1;
     workoutPost.active = true;
     workoutPost.public = false;
 
-    // expand the facilities array of numbers to array of objects
-    // const facilityObjects = [];
-    // for (let f = 1; f < workoutPost.facilities.length; f++) {
-    //   const facilityName = this.locationOptions.find(x => x.id === workoutPost.facilities[f].id).description;
-    //   console.log('Facility name', facilityName);
-    //   facilityObjects.push({
-    //     id: f,
-    //     description: facilityName
-    //   });
-    // }
-    // workoutPost.facilities = facilityObjects;
-
     if (this.workoutForm.valid) {
-      this.store.dispatch(new AddWorkout(workoutPost));
+      this.store.dispatch(new AddWorkout(workoutPost)).subscribe(() => {
+        // clear form and do navigation when finished
+        this.workoutForm.reset();
+        this.router.navigateByUrl('/catalog');
+      });
     }
   }
 
