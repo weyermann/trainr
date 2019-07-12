@@ -29,6 +29,7 @@
     "@ngxs/logger-plugin": "^3.4.3",
     "@ngxs/store": "^3.4.3",
     "core-js": "^2.5.4",
+    "fast-deep-equal": "^2.0.1",
     "hammerjs": "^2.0.8",
     "ng-zorro-antd": "^8.0.2",
     "rxjs": "~6.5.2",
