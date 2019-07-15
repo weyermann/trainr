@@ -6,16 +6,18 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { TranslateModule } from '@ngx-translate/core';
 import { NgZorroAntdModule } from 'ng-zorro-antd';
 import { SharedModule } from 'src/app/shared/shared.module';
+import { CatalogComponent } from './components/catalog/catalog.component';
 
 @NgModule({
-  declarations: [CreateWorkoutComponent],
+  declarations: [CreateWorkoutComponent, CatalogComponent],
   imports: [
     TranslateModule,
     CommonModule,
     WorkoutsRoutingModule,
     FormsModule, ReactiveFormsModule,
     NgZorroAntdModule,
-    SharedModule,
-  ]
+    SharedModule
+  ],
+  exports: [CatalogComponent],
 })
 export class WorkoutsModule { }

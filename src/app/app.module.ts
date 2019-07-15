@@ -40,7 +40,6 @@ registerLocaleData(en);
     SideNavigationComponent,
     TestCardComponent,
     LangSelectorComponent
-
   ],
   imports: [
     HttpClientModule,

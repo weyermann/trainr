@@ -127,7 +127,7 @@ export class CreateWorkoutComponent implements OnInit {
         // clear form and do navigation when action finished
         this.appService.displaySuccessMessage('Workout created');
         this.workoutForm.reset();
-        this.router.navigateByUrl('/catalog');
+        this.router.navigateByUrl('/workouts');
       });
     }
   }

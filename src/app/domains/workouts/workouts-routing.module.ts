@@ -5,13 +5,13 @@ import { WorkoutCatalogComponent } from './containers/workout-catalog/workout-ca
 
 const routes: Routes = [
   {
-    path: 'catalog',
-    component: WorkoutCatalogComponent,
+    path: 'workout/:id',
+    component: CreateWorkoutComponent,
     data: {}
   },
   {
-    path: 'create',
-    component: CreateWorkoutComponent,
+    path: 'workouts',
+    component: WorkoutCatalogComponent,
     data: {}
   }
 ];
