@@ -14,7 +14,7 @@ export class WorkoutService {
 
   constructor(private http: HttpClient) {}
 
-  
+
 
   getAllUserWorkouts(userID: number): Observable<any[]> {
     return this.http.get<any>(this.API_HOST + 'workouts?user=' + userID).pipe(
@@ -25,7 +25,25 @@ export class WorkoutService {
   }
 
   addUserWorkout(body: Workout): Observable<any> {
-    return this.http.post<any>(this.API_HOST + `workouts`, body).pipe(map(res => {
+    return this.http.post<any>(this.API_HOST + `workouts`, body).pipe(
+      map(res => {
+        return res.data;
+      })
+    );
+  }
+
+  getWorkout(workoutID: number): Observable<any> {
+    const id: string = workoutID.toString();
+    return this.http.get<any>(this.API_HOST + `workouts/${id}`).pipe(
+      map(res => {
+        return res;
+      })
+    );
+  }
+
+  updateWorkout(body: Workout): Observable<any> {
+    return this.http.put<any>(this.API_HOST + `workouts`, body).pipe(
+      map(res => {
         return res.data;
       })
     );

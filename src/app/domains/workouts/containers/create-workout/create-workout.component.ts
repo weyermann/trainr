@@ -1,14 +1,15 @@
+import { WorkoutService } from './../../../../api-services/workout.service';
 import { AppService } from './../../../../services/app.service';
 import { Workout } from './../../../../model/workout';
 import { AddWorkout } from './../../../../state/workouts.state';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, ValidationErrors, Validators } from '@angular/forms';
-import { Observable, Observer } from 'rxjs';
+import { Observable, Observer, of } from 'rxjs';
 import { Store } from '@ngxs/store';
 import { SharedState } from 'src/app/state/shared.state';
 import { ListItem } from 'src/app/shared/interfaces/interfaces';
-import { map } from 'rxjs/operators';
-import { Router } from '@angular/router';
+import { map, switchMap } from 'rxjs/operators';
+import { Router, ActivatedRoute, ParamMap } from '@angular/router';
 
 // const energySystemOptions = [
 //   {
@@ -42,6 +43,7 @@ import { Router } from '@angular/router';
 export class CreateWorkoutComponent implements OnInit {
 
   values: any[] | null = null;
+  workout$: Observable<Workout>;
 
   // Observable lists
   energySystemOptions$: Observable<ListItem[]>;
@@ -49,7 +51,6 @@ export class CreateWorkoutComponent implements OnInit {
   experienceLevelOptions$: Observable<ListItem[]>;
 
   // Lookup values
-  experienceOptions: string[];
   locationOptions: ListItem[] = [];
 
   workoutForm: FormGroup;
@@ -59,7 +60,9 @@ export class CreateWorkoutComponent implements OnInit {
     private fb: FormBuilder,
     private store: Store,
     private router: Router,
-    private appService: AppService) {
+    private route: ActivatedRoute,
+    private appService: AppService,
+    private workoutService: WorkoutService) {
 
     this.workoutForm = this.fb.group({
       workoutName: ['', Validators.required],
@@ -77,6 +80,14 @@ export class CreateWorkoutComponent implements OnInit {
       defRestDurationBetweenRepsSeconds: [120],
       defRestDurationBetweenSetsSeconds: [300],
     });
+
+    // this.workout$ = of(this.workoutForm.value);
+
+    // this.workout$.subscribe((wdata) => {
+    //   alert('Subscribed workout: duration = ' +  wdata.duration.toString());
+
+    //   this.workoutForm.patchValue(wdata);
+    // });
   }
 
   ngOnInit() {
@@ -92,6 +103,30 @@ export class CreateWorkoutComponent implements OnInit {
           console.log('Location options:', l);
         })
       ).subscribe();
+
+      // Check for routing parameter workoutID and load workout for editing
+      const workoutID: Observable<string> = this.route.params.pipe(map(p => p.id));
+
+      workoutID.subscribe((id => {
+        if (+id > 0) {
+          this.workout$ = this.workoutService.getWorkout(+id);
+
+          this.workout$.subscribe((wdata) => {
+            alert('Subscribed workout: duration = ' +  wdata.duration.toString());
+
+            // Patch form values
+            // this.workoutForm.patchValue(wdata);
+            this.workoutForm.controls.workoutName.setValue(wdata.workoutName);
+          });
+        }
+      }));
+
+      this.workoutForm.controls.workoutName.setValue('Quatschname');
+
+      // this.workout$ = this.route.paramMap.pipe(
+      //   switchMap((params: ParamMap) =>
+      //     this.workoutService.getWorkout(+params.get('id')))
+      // );
 
   }
 

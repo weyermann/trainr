@@ -7,9 +7,10 @@ import { TranslateModule } from '@ngx-translate/core';
 import { NgZorroAntdModule } from 'ng-zorro-antd';
 import { SharedModule } from 'src/app/shared/shared.module';
 import { CatalogComponent } from './components/catalog/catalog.component';
+import { EditWorkoutComponent } from './components/edit-workout/edit-workout.component';
 
 @NgModule({
-  declarations: [CreateWorkoutComponent, CatalogComponent],
+  declarations: [CreateWorkoutComponent, CatalogComponent, EditWorkoutComponent],
   imports: [
     TranslateModule,
     CommonModule,

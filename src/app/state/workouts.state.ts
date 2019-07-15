@@ -14,6 +14,11 @@ export class AddWorkout {
   constructor(public payload: Workout) {}
 }
 
+export class UpdateWorkout {
+  static readonly type = '[Workout] Update workout';
+  constructor(public payload: Workout) {}
+}
+
 export class LoadUserWorkouts {
   static readonly type = '[Workout] Load user workouts';
   constructor(public userID: number) {}
@@ -83,6 +88,21 @@ export class WorkoutCatalogState {
     { payload }: AddWorkout
   ) {
     return this.workoutApiService.addUserWorkout(payload).pipe(
+      tap((result) => {
+        const state = getState();
+        patchState({
+          workouts: [...state.workouts, result]
+        });
+      })
+    );
+  }
+
+  @Action(UpdateWorkout)
+  updateWorkout(
+    { getState, patchState }: StateContext<WorkoutCatalogStateModel>,
+    { payload }: UpdateWorkout
+  ) {
+    return this.workoutApiService.updateWorkout(payload).pipe(
       tap((result) => {
         const state = getState();
         patchState({

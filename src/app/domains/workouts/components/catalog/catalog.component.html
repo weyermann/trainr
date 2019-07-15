@@ -17,7 +17,7 @@
           <td>{{ workout?.synopsis }}</td>
           <td>{{ workout?.duration }}</td>
           <td>
-            <a>Action 一 {{ workout?.workoutName }}</a>
+            <a (click)="editWorkout(workout?.id)">Edit</a>
             <nz-divider nzType="vertical"></nz-divider>
             <a>Delete</a>
           </td>
