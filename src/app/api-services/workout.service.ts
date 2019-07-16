@@ -2,7 +2,7 @@ import { APIResponse } from './../shared/interfaces/interfaces';
 import { environment } from './../../environments/environment';
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Observable } from 'rxjs';
+import { Observable, of } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { WorkoutListResponse, Workout } from '../model/workout';
 
@@ -13,8 +13,6 @@ export class WorkoutService {
   private API_HOST = environment.API_URL;
 
   constructor(private http: HttpClient) {}
-
-
 
   getAllUserWorkouts(userID: number): Observable<any[]> {
     return this.http.get<any>(this.API_HOST + 'workouts?user=' + userID).pipe(
@@ -33,16 +31,21 @@ export class WorkoutService {
   }
 
   getWorkout(workoutID: number): Observable<any> {
-    const id: string = workoutID.toString();
-    return this.http.get<any>(this.API_HOST + `workouts/${id}`).pipe(
-      map(res => {
-        return res;
-      })
-    );
+    if (workoutID === 0) {
+      return of({});
+    } else {
+      const id: string = workoutID.toString();
+      return this.http.get<any>(this.API_HOST + `workouts/${id}`).pipe(
+        map(res => {
+          return res;
+        })
+      );
+    }
   }
 
   updateWorkout(body: Workout): Observable<any> {
-    return this.http.put<any>(this.API_HOST + `workouts`, body).pipe(
+    const id = body.id;
+    return this.http.put<any>(this.API_HOST + `workouts/${id}`, body).pipe(
       map(res => {
         return res.data;
       })

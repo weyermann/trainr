@@ -28,7 +28,7 @@ export class LoadUserWorkouts {
   name: 'workouts',
   defaults: {
     workouts: [
-      {
+      { id: null,
         userID: 1,
         workoutName: 'test',
         energySystem: 0,

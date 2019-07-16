@@ -1,5 +1,5 @@
 export class Workout {
-  // id: number;
+  id: number;
   userID: number;
   workoutName: string;
   energySystem: number;

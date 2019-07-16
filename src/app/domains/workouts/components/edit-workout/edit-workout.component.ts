@@ -1,4 +1,4 @@
-import { AddWorkout } from './../../../../state/workouts.state';
+import { AddWorkout, UpdateWorkout } from './../../../../state/workouts.state';
 import { Workout } from './../../../../model/workout';
 import { ListItem } from 'src/app/shared/interfaces/interfaces';
 import { AppService } from './../../../../services/app.service';
@@ -28,6 +28,8 @@ export class EditWorkoutComponent implements OnInit {
   locationOptionsList: ListItem[] = [];
 
   values: any[] | null = null;
+
+  isUpdate = false;
 
   constructor(
     private fb: FormBuilder,
@@ -67,6 +69,11 @@ export class EditWorkoutComponent implements OnInit {
       this.workout.subscribe((wdata) => {
        // alert('Inner component workout: duration = ' +  wdata.duration.toString());
 
+       if (wdata.id && wdata.id > 0) {
+         console.log('Updating workout');
+        this.isUpdate = true;
+       }
+
         // Patch form values
         this.workoutForm.patchValue(wdata);
       });
@@ -100,12 +107,23 @@ export class EditWorkoutComponent implements OnInit {
     workoutPost.public = false;
 
     if (this.workoutForm.valid) {
-      this.store.dispatch(new AddWorkout(workoutPost)).subscribe(() => {
-        // clear form and do navigation when action finished
-        this.appService.displaySuccessMessage('Workout created');
-        this.workoutForm.reset();
-        this.router.navigateByUrl('/workouts');
-      });
+      if (this.isUpdate === false) {
+        // Create a new workout
+        this.store.dispatch(new AddWorkout(workoutPost)).subscribe(() => {
+          // clear form and do navigation when action finished
+          this.appService.displaySuccessMessage('Workout created');
+          this.workoutForm.reset();
+          this.router.navigateByUrl('/workouts');
+        });
+      } else {
+        // Update an existing workout
+        this.store.dispatch(new UpdateWorkout(workoutPost)).subscribe(() => {
+          // clear form and do navigation when action finished
+          this.appService.displaySuccessMessage('Workout created');
+          this.workoutForm.reset();
+          this.router.navigateByUrl('/workouts');
+        });
+      }
     }
   }
 

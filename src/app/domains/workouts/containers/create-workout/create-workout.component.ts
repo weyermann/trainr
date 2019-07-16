@@ -112,57 +112,57 @@ export class CreateWorkoutComponent implements OnInit {
 
   }
 
-  submitForm(formvalue: any): void {
-    // tslint:disable-next-line:forin
-    for (const key in this.workoutForm.controls) {
-      this.workoutForm.controls[key].markAsDirty();
-      this.workoutForm.controls[key].updateValueAndValidity();
-    }
-    console.log(formvalue);
+  // submitForm(formvalue: any): void {
+  //   // tslint:disable-next-line:forin
+  //   for (const key in this.workoutForm.controls) {
+  //     this.workoutForm.controls[key].markAsDirty();
+  //     this.workoutForm.controls[key].updateValueAndValidity();
+  //   }
+  //   console.log(formvalue);
 
-    // expand the facilities array of numbers to array of objects
-    const facilityObjects = [];
-    for (let f = 1; f < formvalue.facilities.length; f++) {
-      const facilityName = this.locationOptions.find(x => x.id === formvalue.facilities[f]).description;
-      console.log('Facility name', facilityName);
-      facilityObjects.push({
-        id: formvalue.facilities[f],
-        description: facilityName
-      });
-    }
-    formvalue.facilities = facilityObjects;
+  //   // expand the facilities array of numbers to array of objects
+  //   const facilityObjects = [];
+  //   for (let f = 1; f < formvalue.facilities.length; f++) {
+  //     const facilityName = this.locationOptions.find(x => x.id === formvalue.facilities[f]).description;
+  //     console.log('Facility name', facilityName);
+  //     facilityObjects.push({
+  //       id: formvalue.facilities[f],
+  //       description: facilityName
+  //     });
+  //   }
+  //   formvalue.facilities = facilityObjects;
 
 
-    // Create workout to post and add missing (yet) static properties
-    const workoutPost = new Workout(formvalue);
-    workoutPost.userID = 1;
-    workoutPost.active = true;
-    workoutPost.public = false;
+  //   // Create workout to post and add missing (yet) static properties
+  //   const workoutPost = new Workout(formvalue);
+  //   workoutPost.userID = 1;
+  //   workoutPost.active = true;
+  //   workoutPost.public = false;
 
-    if (this.workoutForm.valid) {
-      this.store.dispatch(new AddWorkout(workoutPost)).subscribe(() => {
-        // clear form and do navigation when action finished
-        this.appService.displaySuccessMessage('Workout created');
-        this.workoutForm.reset();
-        this.router.navigateByUrl('/workouts');
-      });
-    }
-  }
+  //   if (this.workoutForm.valid) {
+  //     this.store.dispatch(new AddWorkout(workoutPost)).subscribe(() => {
+  //       // clear form and do navigation when action finished
+  //       this.appService.displaySuccessMessage('Workout created');
+  //       this.workoutForm.reset();
+  //       this.router.navigateByUrl('/workouts');
+  //     });
+  //   }
+  // }
 
-  resetForm(e: MouseEvent): void {
-    e.preventDefault();
-    console.log('Form before reset: ');
-    console.log(this.workoutForm.value);
-    this.workoutForm.reset();
-    // tslint:disable-next-line:forin
-    for (const key in this.workoutForm.controls) {
-      this.workoutForm.controls[key].markAsPristine();
-      this.workoutForm.controls[key].updateValueAndValidity();
-    }
-  }
+  // resetForm(e: MouseEvent): void {
+  //   e.preventDefault();
+  //   console.log('Form before reset: ');
+  //   console.log(this.workoutForm.value);
+  //   this.workoutForm.reset();
+  //   // tslint:disable-next-line:forin
+  //   for (const key in this.workoutForm.controls) {
+  //     this.workoutForm.controls[key].markAsPristine();
+  //     this.workoutForm.controls[key].updateValueAndValidity();
+  //   }
+  // }
 
-  onChanges(values: any): void {
-    console.log(values, this.values);
-  }
+  // onChanges(values: any): void {
+  //   console.log(values, this.values);
+  // }
 
 }
