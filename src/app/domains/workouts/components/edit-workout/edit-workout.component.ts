@@ -65,11 +65,10 @@ export class EditWorkoutComponent implements OnInit {
       ).subscribe();
 
       this.workout.subscribe((wdata) => {
-        alert('Inner component workout: duration = ' +  wdata.duration.toString());
+       // alert('Inner component workout: duration = ' +  wdata.duration.toString());
 
         // Patch form values
         this.workoutForm.patchValue(wdata);
-        // this.workoutForm.controls.workoutName.setValue(wdata.workoutName);
       });
   }
 

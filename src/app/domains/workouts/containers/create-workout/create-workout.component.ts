@@ -105,29 +105,10 @@ export class CreateWorkoutComponent implements OnInit {
       ).subscribe();
 
       // Check for routing parameter workoutID and load workout for editing
-      const workoutID: Observable<string> = this.route.params.pipe(map(p => p.id));
-
-      workoutID.subscribe((id => {
-        if (+id > 0) {
-          this.workout$ = this.workoutService.getWorkout(+id);
-
-          this.workout$.subscribe((wdata) => {
-            alert('Subscribed workout: duration = ' +  wdata.duration.toString());
-
-            // Patch form values
-            // this.workoutForm.patchValue(wdata);
-            // this.workoutForm.controls.workoutName.setValue(wdata.workoutName);
-          });
-        }
-      }));
-
-      // Does not work either
-      // this.workoutForm.controls.workoutName.setValue('Quatschname');
-
-      // this.workout$ = this.route.paramMap.pipe(
-      //   switchMap((params: ParamMap) =>
-      //     this.workoutService.getWorkout(+params.get('id')))
-      // );
+      this.workout$ = this.route.paramMap.pipe(
+        switchMap((params: ParamMap) =>
+          this.workoutService.getWorkout(+params.get('id')))
+      );
 
   }
 
