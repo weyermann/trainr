@@ -20,7 +20,8 @@ export class EditWorkoutComponent implements OnInit {
   @Input() locationOptions: Observable<ListItem[]>;
   @Input() experienceLevelOptions: Observable<ListItem[]>;
 
-  @Input() formvalues: any; // If we are editing an existing workout, the form must be initialized with these values
+  // @Input() formvalues: any; // If we are editing an existing workout, the form must be initialized with these values
+  @Input() workout: Observable<Workout>; // If we are editing an existing workout, the form must be initialized with these values
 
   workoutForm: FormGroup;
   // Lookup values
@@ -62,6 +63,14 @@ export class EditWorkoutComponent implements OnInit {
           console.log('Location options:', l);
         })
       ).subscribe();
+
+      this.workout.subscribe((wdata) => {
+        alert('Inner component workout: duration = ' +  wdata.duration.toString());
+
+        // Patch form values
+        this.workoutForm.patchValue(wdata);
+        // this.workoutForm.controls.workoutName.setValue(wdata.workoutName);
+      });
   }
 
   submitForm(formvalue: any): void {

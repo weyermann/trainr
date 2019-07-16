@@ -116,12 +116,13 @@ export class CreateWorkoutComponent implements OnInit {
 
             // Patch form values
             // this.workoutForm.patchValue(wdata);
-            this.workoutForm.controls.workoutName.setValue(wdata.workoutName);
+            // this.workoutForm.controls.workoutName.setValue(wdata.workoutName);
           });
         }
       }));
 
-      this.workoutForm.controls.workoutName.setValue('Quatschname');
+      // Does not work either
+      // this.workoutForm.controls.workoutName.setValue('Quatschname');
 
       // this.workout$ = this.route.paramMap.pipe(
       //   switchMap((params: ParamMap) =>
